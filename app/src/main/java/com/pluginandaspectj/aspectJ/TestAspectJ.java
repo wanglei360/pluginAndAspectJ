@@ -5,8 +5,12 @@ import com.pluginandaspectj.util.ToastUtil;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
+
+import java.lang.reflect.Method;
 
 /*
 https://www.jianshu.com/p/c66f4e3113b3
@@ -38,9 +42,19 @@ public class TestAspectJ {
     public void test3() {
     }
 
-    @After("test1()")
+    @Around("test1()")
     public void test1(final ProceedingJoinPoint joinPoint) {
-        ToastUtil.showToast("织入点击的test");
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    //执行的目标方法，运行在子线程中
+                    joinPoint.proceed(joinPoint.getArgs());
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     @After("test2()")
