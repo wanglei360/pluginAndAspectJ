@@ -1,0 +1,44 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation localGroovy()
+    implementation gradleApi()
+    //以下为自己需要用到的导包
+//    implementation 'com.android.tools.build:gradle:3.4.2'
+//    implementation 'org.aspectj:aspectjtools:1.8.9'
+//    implementation 'org.aspectj:aspectjrt:1.9.3'
+}
+group = 'com.myplugin'  // 组名
+version = '1.0.0' // 版本
+
+
+//打包到本地或上传远程maven库
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //    提交到远程maven库
+//            repository(url: uri('')){
+//                authentication(userName:'', password:'')//远程maven库的用户名和密码
+//            }
+//          提交到本地maven地址
+            repository(url: uri('/Users/wanglei/Documents/svnDemo/pluginAndAspectJ/plug'))
+            pom.groupId = 'com.myplugin' // 组名 todo 不能使用25行的group,否则报错，不明原因
+            pom.artifactId = 'MyGroovyPlugin' // 插件名
+            pom.version = '1.0.0' // 版本号 todo 不能使用26行的version,否则报错，不明原因
+        }
+    }
+}
