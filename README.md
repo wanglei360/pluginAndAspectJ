@@ -1,7 +1,7 @@
 # 插件基本制作
 ### 1：创建一个 module
 ### 2：只留下 src/main文件夹 和 build.gradle,其它都删除
-###3:删除 build.gradle 里面所有的内容，然后填写以下内容,然后点击右上角的Sync Now
+### 3:删除 build.gradle 里面所有的内容，然后填写以下内容,然后点击右上角的Sync Now
 ```
 apply plugin: 'groovy'
 apply plugin: 'maven'
@@ -47,7 +47,7 @@ uploadArchives {
     }
 }
 ```
-###4:在main 目录下创建 groovy 文件夹，在该文件夹下创建的包名和.groovy文件
+### 4:在main 目录下创建 groovy 文件夹，在该文件夹下创建的包名和.groovy文件
 ```
 package com.myPlugin
 
@@ -63,13 +63,13 @@ public class MyGroovyPugin implements Plugin<Project> {
     }
 }
 ```
-###5:在 main 目录下依次创建 resources -> META-INF -> gradle-plugins 文件夹，最后在 gradle-plugins文件夹下创建一个 MyGroovyPlugin.properties 文件，在该文件中填写
+### 5:在 main 目录下依次创建 resources -> META-INF -> gradle-plugins 文件夹，最后在 gradle-plugins文件夹下创建一个 MyGroovyPlugin.properties 文件，在该文件中填写
 ```
 implementation-class=com.myPlugin.MyGroovyPugin//groovy文件的包名+文件名
 ```
 这里的.properties之前的名字就是app下的 build.gradle 中引入时的名字,例如：apply plugin: ‘MyGroovyPlugin’
-###6:点击右侧Gradle->module名字->Tasks->upload->uploadArchives,就会在第一个代码块的指定的位置生成一个插件。
-###7:使用该插件的方法：
+### 6:点击右侧Gradle->module名字->Tasks->upload->uploadArchives,就会在第一个代码块的指定的位置生成一个插件。
+### 7:使用该插件的方法：
 ```
 1:在项目的build.gradle中的buildscript->repositories下添加maven引入
     maven{
@@ -81,7 +81,7 @@ implementation-class=com.myPlugin.MyGroovyPugin//groovy文件的包名+文件名
 3：app下的build.gradle中添加对该插件的引用，如：apply plugin: 'MyGroovyPlugin'
 
 ```
-###8：clean工程，就能在Run下看到，这是在MyGroovyPlugin.properties文件中写的输出内容
+### 8：clean工程，就能在Run下看到，这是在MyGroovyPlugin.properties文件中写的输出内容
 ```
 -------------
 内容
