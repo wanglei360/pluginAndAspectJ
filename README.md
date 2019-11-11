@@ -1,6 +1,6 @@
 # 插件基本制作
-### 1：创建一个 module
-### 2：只留下 src/main文件夹 和 build.gradle,其它都删除
+### 1:创建一个 module
+### 2:只留下 src/main文件夹 和 build.gradle,其它都删除
 ### 3:删除 build.gradle 里面所有的内容，然后填写以下内容,然后点击右上角的Sync Now
 ```
 apply plugin: 'groovy'
@@ -73,8 +73,8 @@ implementation-class=com.myPlugin.MyGroovyPugin//groovy文件的包名+文件名
 ```
 1:在项目的build.gradle中的buildscript->repositories下添加maven引入
     maven{
-       url uri('/Users/wanglei/Downloads/MyApplication/custom_pugin_and_aspectj/plug')
-        }
+        url uri('/Users/wanglei/Documents/svnDemo/pluginAndAspectJ/plug')
+    }
 2：继续在该文件下的dependencies中添加引入
       //格式为：group:插件名:version，可在之前在写插件时的build.gradle中寻找这些内容
       classpath 'cn.my_plugin:MyGroovyPlugin:1.0.0'
