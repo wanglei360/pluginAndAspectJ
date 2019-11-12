@@ -88,4 +88,5 @@ implementation-class=com.myPlugin.MyGroovyPugin//groovy文件的包名+文件名
 -------------
 ```
 ## [AspectJ切入点语法详解](https://blog.csdn.net/zhengchao1991/article/details/53391244)
+## [AOP讲解](https://www.jianshu.com/p/0799aa19ada1)
 ### 感谢分享
