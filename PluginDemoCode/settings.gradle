@@ -1,0 +1,31 @@
+pluginManagement {
+    //TODO 在app的module中引入插件需添加这个代码块
+    resolutionStrategy {
+        eachPlugin {
+            //todo 如果是groupId
+//            if (requested.id.namespace == 'lugins') {
+//                // groupId:artifactId:version
+//                useModule("${requested.id.namespace}:${requested.id.name}:${requested.version}")
+//            }
+        }
+    }
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        maven {
+            url = "../pluginAndAspectJ/AspectjPlugin"
+        }
+    }
+}
+dependencyResolutionManagement {
+//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "pluginAndAspectJ"
+include ':app'
+include ':PluginDemoCode'
+include ':AspectjPluginCode'
