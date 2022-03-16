@@ -1,3 +1,5 @@
+[asPectJ找到一个现成的挺好用](https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx)
+
 # 插件基本制作
 ## 7.0以后的配置
 ###创建插件：
