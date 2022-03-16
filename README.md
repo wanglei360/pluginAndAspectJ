@@ -1,4 +1,52 @@
 # 插件基本制作
+## 7.0以后的配置
+###创建插件：
+#### 1：创建一个空的module，只保留类和空的build.gradle
+#### 2：编写插件：随便创建一个类
+    public class DemoPlugins implements Plugin<Project> {
+        @Override public void apply(Project project) {
+            System.out.println("GreetingStandaloneGradlePlugins(standalone) ---> apply");
+        }
+    }
+#### 3：编写build.gradle,参照pluginDemo中编写即可，都有注释
+#### 4：生成插件：点击Gradle->pluginDemo(插件module名字)->Tasks->publishing->publish,即可生成插件
+
+###使用插件：
+#### 1：根目录settings.gradle-> pluginManagement添加代码块
+    resolutionStrategy {
+            eachPlugin {
+                //todo 如果是指定的groupId
+                if (requested.id.namespace == 'lugins') {
+                    // groupId:artifactId:version
+                    useModule("${requested.id.namespace}:${requested.id.name}:${requested.version}")
+                }
+            }
+        }
+    在pluginManagement ->repositories 添加maven引入
+        maven {
+            //这里是当前根目录下的plugDemo文件夹
+            url = "../pluginAndAspectJ/plugDemo"
+        }
+#### 2：在使用插件的module中的build.gradle->plugins中添加以下代码
+    // 对应的是插件module中build.gradle中的'groupId.artifactId'  version 'version'
+    id 'lugins.dalone' version '1.0.0'
+
+### 检查是否成功：
+Gradle->app(使用插件的module名字)->Tasks->build->build
+点击后就能在as的Build窗口中看到上面DemoPlugins类中打印的内容了
+
+
+
+
+
+
+
+
+
+
+
+
+## 7.0以前的配置
 ### 1:创建一个 module
 ### 2:只留下 src/main文件夹 和 build.gradle,其它都删除
 ### 3:删除 build.gradle 里面所有的内容，然后填写以下内容,然后点击右上角的Sync Now
