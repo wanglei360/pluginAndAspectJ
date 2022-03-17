@@ -1,4 +1,6 @@
 [asPectJ找到一个现成的挺好用](https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx)
+但是有个问题，gradle需要在7.0以下，现在好多第三方都没有适配gradle7.0以上，所以如果近期使用的话，可以降级gradle到7.0以下
+
 
 # 插件基本制作
 ## 7.0以后的配置
