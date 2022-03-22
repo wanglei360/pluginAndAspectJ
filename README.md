@@ -1,21 +1,49 @@
 [asPectJ找到一个现成的挺好用](https://github.com/Ibotta/gradle-aspectj-pipeline-plugin)
-settingsgradle->pluginManagement添加代码块
-resolutionStrategy {
-    eachPlugin {
-        if (requested.id.id == "com.ibotta.gradle.aop") {
-            useModule("com.ibotta.gradle.aop:com.ibotta.gradle.aop.gradle.plugin:${requested.version}")
+[asPectJ找到一个现成的挺好用](https://github.com/Ibotta/gradle-aspectj-pipeline-plugin)
+
+settings.gradle->pluginManagement添加代码块
+
+	resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "com.ibotta.gradle.aop") {
+                useModule("com.ibotta.gradle.aop:com.ibotta.gradle.aop.gradle.plugin:${requested.version}")
+            }
         }
     }
-}
-根目录的build.gradle->plugins添加    id 'com.ibotta.gradle.aop' version '1.3.1' apply false
+
+根目录的build.gradle->plugins添加    `id 'com.ibotta.gradle.aop' version '1.3.1' apply false`
+
 使用aspectJ的module添加
-plugins {
-...
-id 'com.ibotta.gradle.aop'
-}
-dependencies{
-implementation 'org.aspectj:aspectjrt:1.9.6'
-}
+
+	plugins {
+	...
+	id 'com.ibotta.gradle.aop'
+	}
+	dependencies{
+	implementation 'org.aspectj:aspectjrt:1.9.6'
+	}
+
+# 它有示例应用程序！
+在这个项目中，你会发现一些示例应用程序使用这个插件来执行一些简单的AOP编织。其中包括测试，以帮助证明编织发生了，
+并按预期运行。也许你有一个只使用Kotlin的项目，或者只使用Java，或者混合使用！我们有每一个例子：
+
+- [Kotlin Only Sample App](sample-kotlin)
+- [Java Only Sample App](sample-java)
+- [Mixed Java/Kotlin Sample App](sample-mixed)
+
+# 如何构建项目
+
+如果您没有对项目进行任何代码更改，只是想构建它，那么您可以从项目的根目录运行以下命令：./gradlew build
+
+如果您对其中一个示例项目进行了更改，但没有对插件源代码进行更改，那么只需构建示例项目并运行它即可。例如（建筑）：./gradlew :sample-mixed:build
+
+如果您对插件的源代码进行了更改，并希望使用其中一个示例应用程序对其进行测试，那么您将需要执行以下操作：
+
+1. 更新依赖项。通过将 `VERSION` 变量增加到下一个较小的值（或者，一些独特的、以前从未使用过的值）来更新`Dependencies.kt`文件。这将确保在将插件发布到Maven local之前构建新版本的插件。
+
+1. 执行命令`./publishLocal.sh`。在root director中使用sh脚本。这将把插件作为工件推送到Maven本地存储库。
+
+1. 最后，构建并运行您正在测试的示例项目。示例项目引用的版本变量与您在步骤1中更新的 `VERSION` 变量相同。它应该自动获取在第2步中发布到Maven local的插件版本。
 
 # 插件基本制作
 ## 7.0以后的配置
