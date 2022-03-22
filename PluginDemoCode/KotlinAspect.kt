@@ -12,6 +12,7 @@ import org.aspectj.lang.annotation.Before
  */
 @Aspect
 class KotlinAspect {
+
     @Before("execution(* btnClik(..))")
     fun before(joinPoint: JoinPoint) {
         Log.d("asdfasdf", "之前执行")
